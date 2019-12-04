@@ -1,0 +1,4 @@
+== Academy Introduction Exercises
+
+This repo contains all material relating to the exercises ran within the Introduction to the PSP Academy.
+
