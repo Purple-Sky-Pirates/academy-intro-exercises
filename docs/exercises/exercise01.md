@@ -10,7 +10,7 @@ To login via the WebUI, simply navigate to the console URL provided.
 
 To login from an SSH terminal, use the OpenShift CLI (`oc`), in the following format.
 
-$ oc login -u <your_username> -p <your_password> https://openshift-cluster.example.com
+$ oc login -u $YOURUSERNAME -p $YOURPASSWORD https://openshift-cluster.example.com
 
 
 ## Step 1
