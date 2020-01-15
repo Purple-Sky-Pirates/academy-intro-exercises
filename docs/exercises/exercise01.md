@@ -9,8 +9,8 @@ For this exercise an OpenShift cluster has been created and made available for y
 Any word in all caps preceded by a dollar sign is an environment variable. You can either manually replace these with your provided username and password (e.g. username = "Bob" and password = "p4ssword"), or you can set these as environment variables and (most) command lines will automatically substitute these with the set variable.
 
 ```
-YOURUSERNAME="Bob"             # sets variable for current shell only
-export YOURPASSWORD="p4ssword" # set for current shell and all processes
+$ YOURUSERNAME="Bob"             # sets variable for current shell only
+$ export YOURPASSWORD="p4ssword" # set for current shell and all processes
 ```
 
 To check that these have been set type `echo $YOURUSERNAME` If successful this should output `Bob`.
