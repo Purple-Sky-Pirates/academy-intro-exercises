@@ -20,7 +20,9 @@ To login via the WebUI, simply navigate to the console URL provided.
 
 To login from an SSH terminal, use the OpenShift CLI (`oc`), in the following format.
 
+```
 $ oc login -u <your_username> -p <your_password> https://openshift-cluster.example.com
+```
 
 ## Step 1
 
@@ -28,11 +30,15 @@ $ oc login -u <your_username> -p <your_password> https://openshift-cluster.examp
 
 Using the bastion host, or your local workstation, clone the repository.
 
+```
 $ git clone https://github.com/Purple-Sky-Pirates/exercise02-code.git
+```
 
 Checkout the `ocp-4.2` branch
 
+```
 $ git checkout ocp-4.2
+```
 
 ### Create Base Projects
 
@@ -40,20 +46,28 @@ As mentioned, this template utilises three projects so lets create them now.
 
 IMPORTANT: Kubernetes does not allow multiple projects to use the same name, so for this exercise, append your username to each of the project names, (eg `cicd-jbloggs`, `dev-jbloggs`, `stage-jbloggs`), to ensure you don't trample on each others projects.
 
+```
 $ oc new-project cicd-<username> --display-name="<username> - <username> CI/CD"
+  
 $ oc new-project dev-<username> --display-name="<username> - <username> Dev"
-$ oc new-project stage-<username> --display-name="<username> <username> Stage"
+
+$ oc new-project stage-<username> --display-name="<username> - <username> Stage"
+```
 
 ### Create Jenkins Pod
 
 Although we could include the creation of a Jenkins instance within the larger template, in this example we're using the standard Persistent Jenkins template to create a Jenkins Pod within our project.
 
+```
 $ oc new-app jenkins-persistent -n cicd-<username>
+```
 
 The Jenkins container will be deployed into your *CI/CD* project, but to allow it to deploy the built container into the Dev and Stage environment, we need to give it permission to do so.
 
+```
 $ oc policy add-role-to-group edit system:serviceaccounts:cicd-<username> -n dev-<username>
 $ oc policy add-role-to-group edit system:serviceaccounts:cicd-<username> -n stage-<username>
+```
 
 ### Examine the Template
 
@@ -61,5 +75,6 @@ Navigate to https://github.com/Purple-Sky-Pirates/exercise02-code/blob/ocp-4.2/c
 
 ### Deploy the Template
 
+```
 $ oc new-app -n cicd-<username> -f cicd-template.yaml --param DEV_PROJECT=dev-<username> --param STAGE_PROJECT=stage-<usename> --param ENABLE_QUAY=true --param QUAY_USERNAME=<quay_username> --param QUAY_PASSWORD=<quay_password> --param QUAY_REPOSITORY=tasks-app --param QUAY_ORG=<quay_org> --param EPHEMERAL=false
-
+```
