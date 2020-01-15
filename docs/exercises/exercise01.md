@@ -10,8 +10,9 @@ To login via the WebUI, simply navigate to the console URL provided.
 
 To login from an SSH terminal, use the OpenShift CLI (`oc`), in the following format.
 
+```
 $ oc login -u $YOURUSERNAME -p $YOURPASSWORD https://openshift-cluster.example.com
-
+```
 
 ## Step 1
 
@@ -26,11 +27,16 @@ Click *Create Project* and fill in `Name`, `Display Name` and optionally `Descri
 
 The OpenShift CLI `oc` provides a number of helper functions over and above the default kubernetes CLI, `kubectl`, this includes a utility function to create projects.
 
+```
 $ oc new-project my-cool-app --display-name="My Cool Application" --description="Development project for my cool new application"
+```
 
 The `oc` CLI will automatically move your context so that you are *inside* the project you have just created. You can use `oc project` to verify this at any time.
 
+```
 $ oc project
+```
+
 Using project "my-cool-app" on server "https://api.luminiferous.597b.sandbox882.opentlc.com:6443"
 
 
@@ -67,21 +73,31 @@ Here we will be using `oc new-app` to deploy a simple Django based web applicati
 
 .Navigate to your just created project
 
+```
 $ oc project my-cool-app
+```
 
 .Create an Application
 
+```
 $ oc new-app python -p SOURCE_REPOSITORY_URL=https://github.com/Purple-Sky-Pirates/exercise01-code.git
+```
 
 ### Monitor the Build and Deployment using the CLI
 
+```
 $ oc get events
+```
 To view any events that occur (such as pod creation, container build orders, etc)
 
+```
 $ oc logs bc/python
+```
 To view build logs
 
+```
 $ oc logs dc/python
+```
 To view runtime pod deployment logs
  
 
