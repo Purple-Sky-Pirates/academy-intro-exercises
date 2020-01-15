@@ -71,7 +71,7 @@ $ oc project my-cool-app
 
 .Create an Application
 
-$ oc new-app openshift/templates/django.json -p SOURCE_REPOSITORY_URL=https://github.com/Purple-Sky-Pirates/exercise01-code
+$ oc new-app python -p SOURCE_REPOSITORY_URL=https://github.com/Purple-Sky-Pirates/exercise01-code.git
 
 ### Monitor the Build and Deployment using the CLI
 
@@ -100,4 +100,4 @@ In addition, the `new-app` functionality is using the baseline code, alongside a
 
 ## Stretch Goal
 
-Using the power of the internet (or your own inquisitiveness in the CLI/WebUI), scale your app to more than one running pod.
+Using the power of the internet (or your own inquisitiveness in the CLI/WebUI), scale your app to more than one running pod. 
