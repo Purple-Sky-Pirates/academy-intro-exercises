@@ -6,12 +6,22 @@ In this exercise we will be creating a base project within OpenShift, and deploy
 
 For this exercise an OpenShift cluster has been created and made available for your use. You can login using either the WebUI or CLI, both methods use the same credentials that have been provided.
 
+Any word in all caps preceded by a dollar sign is an environment variable. You can either manually replace these with your provided username and password (e.g. username = "Bob" and password = "p4ssword"), or you can set these as environment variables and (most) command lines will automatically substitute these with the set variable.
+
+```
+$ YOURUSERNAME="Bob"             # sets variable for current shell only
+$ export YOURPASSWORD="p4ssword" # set for current shell and all processes
+```
+
+To check that these have been set type `echo $YOURUSERNAME` If successful this should output `Bob`.
+
 To login via the WebUI, simply navigate to the console URL provided.
 
 To login from an SSH terminal, use the OpenShift CLI (`oc`), in the following format.
 
-$ oc login -u <your_username> -p <your_password> https://openshift-cluster.example.com
-
+```
+$ oc login -u $YOURUSERNAME -p $YOURPASSWORD https://openshift-cluster.example.com
+```
 
 ## Step 1
 
@@ -26,11 +36,16 @@ Click *Create Project* and fill in `Name`, `Display Name` and optionally `Descri
 
 The OpenShift CLI `oc` provides a number of helper functions over and above the default kubernetes CLI, `kubectl`, this includes a utility function to create projects.
 
+```
 $ oc new-project my-cool-app --display-name="My Cool Application" --description="Development project for my cool new application"
+```
 
 The `oc` CLI will automatically move your context so that you are *inside* the project you have just created. You can use `oc project` to verify this at any time.
 
+```
 $ oc project
+```
+
 Using project "my-cool-app" on server "https://api.luminiferous.597b.sandbox882.opentlc.com:6443"
 
 
@@ -67,21 +82,31 @@ Here we will be using `oc new-app` to deploy a simple Django based web applicati
 
 .Navigate to your just created project
 
+```
 $ oc project my-cool-app
+```
 
 .Create an Application
 
+```
 $ oc new-app python -p SOURCE_REPOSITORY_URL=https://github.com/Purple-Sky-Pirates/exercise01-code.git
+```
 
 ### Monitor the Build and Deployment using the CLI
 
+```
 $ oc get events
+```
 To view any events that occur (such as pod creation, container build orders, etc)
 
+```
 $ oc logs bc/python
+```
 To view build logs
 
+```
 $ oc logs dc/python
+```
 To view runtime pod deployment logs
  
 
